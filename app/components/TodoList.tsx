@@ -1,63 +1,44 @@
+'use client';
+
 import React from 'react';
-import Link from 'next/link';
+import TodoItem from './TodoItem';
 import { Todo } from '@/types/todo';
 
 type TodoListProps = {
   todos: Todo[];
-};
+  onToggleTodo: (id: number) => void;
+  onDeleteTodo: (id: number) => void;
+}
 
-export default function TodoList({
-  todos,
-}: TodoListProps) {
+export default function TodoList({ todos,onToggleTodo,onDeleteTodo }: TodoListProps) {
+  if (todos.length === 0) {
+    return (
+      <div className="text-center p-8 text-gray-500 border-2 border-dashed
+        border-gray-200 rounded-md">
+        <p>Belum ada tugas. Yay!</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="space-y-4">
-      {todos.map((todo) => (
-        <div
-          key={todo.id}
-          className="bg-white p-6 rounded-xl shadow-md border border-gray-100"
-        >
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <p className="text-sm text-gray-400 mb-1">
-                ID: {todo.id}
-              </p>
+    <div className="mt-6">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-lg font-semibold text-gray-800">Daftar Tugas</h2>
+        <span className="text-xs vg-gray-70 text-gray-600 px-2.5 py-1 rounded-full font-medium">
+          {todos.length} item
+        </span>
+      </div>
 
-              <h2 className="text-xl font-semibold text-gray-800">
-                {todo.title}
-              </h2>
-
-              <p className="text-gray-600 mt-2">
-                {todo.description}
-              </p>
-
-              <p className="text-sm text-gray-400 mt-3">
-                Dibuat: {todo.createdAt}
-              </p>
-            </div>
-
-            <span
-              className={`shrink-0 px-3 py-1 text-sm font-semibold rounded-full ${
-                todo.completed
-                  ? 'bg-green-100 text-green-700'
-                  : 'bg-yellow-100 text-yellow-700'
-              }`}
-            >
-              {todo.completed
-                ? '✓ Selesai'
-                : '⌛ Belum Selesai'}
-            </span>
-          </div>
-
-          <div className="mt-4">
-            <Link
-              href={`/task/${todo.id}`}
-              className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-md transition"
-            >
-              Lihat Detail
-            </Link>
-          </div>
-        </div>
-      ))}
+      <ul className="space-y-3">
+        {todos.map((todo) => (
+          <TodoItem 
+            key={todo.id} 
+            todo={todo}
+            onToggle={onToggleTodo}
+            onDelete={onDeleteTodo}
+           />
+        ))}
+      </ul>
     </div>
   );
 }

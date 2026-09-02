@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import RegisterForm from './components/RegisterForm';
+import RegisterForm from "./components/RegisterForm";
 
 export default function RegisterPage() {
   return (
@@ -24,5 +24,5 @@ export default function RegisterPage() {
         </div>
       </div>
     </main>
-  )
+  );
 }

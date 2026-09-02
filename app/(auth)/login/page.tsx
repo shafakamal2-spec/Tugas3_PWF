@@ -1,42 +1,28 @@
+import React from 'react';
 import Link from 'next/link';
+import LoginForm from "./components/LoginForm";
 
-export default function LoginForm() {
+export default function LoginPage() {
   return (
-    <div className="space-y-4">
-     <div>
-      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-        Email / Username:
-      </label>
-      <input
-        type="text"
-        id="email"
-        name="email"
-        placeholder="Masukkan email"
-        className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-800"
-        />
-    </div>
+    <main className="min-h-screen p-8 bg-gray-100 flex items-center justify-center">
+      <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+        <header className="mb-6 border-b pb-4 text-center">
+          <h1 className="text-2xl font-bold text-gray-800">Login</h1>
+          <p className="text-sm text-gray-500 mt-1">masuk ke akun Anda</p>
+        </header>
 
-    <div>
-      <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-        Password:
-      </label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        placeholder="Masukkan password"
-        className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-800"
-        />
-    </div>
+        {/* Form Komponen */}
+        <LoginForm />
 
-    <div className="pt-2">
-      <Link
-      href="/"
-      className="block text-center w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors"
-      >
-        Login
-      </Link>
-    </div>
-  </div>
+        <div className="mt-6 border-t pt-4 text-center">
+          <p className="text-sm text-gray-600">
+            Belum punya akun?{' '}
+            <Link href="/register" className="text-blue-600 hover:underline font-medium">
+            Daftar di sini
+            </Link>
+          </p>
+        </div>
+      </div>
+    </main>
   );
 }
